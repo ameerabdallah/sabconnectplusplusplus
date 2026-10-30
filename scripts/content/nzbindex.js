@@ -33,14 +33,14 @@ function addToSABnzbdFromNzbindex() {
             }
         }
         
-        console.log('SABconnect++ NZBIndex: Sending to SABnzbd:', nzburl, 'category:', category, 'name:', nice_name);
+        console.log('SABconnect+++ NZBIndex: Sending to SABnzbd:', nzburl, 'category:', category, 'name:', nice_name);
         addToSABnzbd(addLink, nzburl, "addurl", nice_name, category);
     } else {
         $(this).css('background-image', 'url(' + img + ')');
 
         //grab all checked boxes on page for batch download
         var checkedBoxes = $('input[type="checkbox"]:checked');
-        console.log('SABconnect++ NZBIndex: Found checked boxes:', checkedBoxes.length);
+        console.log('SABconnect+++ NZBIndex: Found checked boxes:', checkedBoxes.length);
         
         checkedBoxes.each(function() {
             var $checkbox = $(this);
@@ -67,7 +67,7 @@ function addToSABnzbdFromNzbindex() {
                         }
                     }
                     
-                    console.log('SABconnect++ NZBIndex: Batch sending to SABnzbd:', nzburl);
+                    console.log('SABconnect+++ NZBIndex: Batch sending to SABnzbd:', nzburl);
                     addToSABnzbd(addLink, nzburl, "addurl", nice_name, category);
                 }
             }
@@ -78,10 +78,10 @@ function addToSABnzbdFromNzbindex() {
 }
 
 function handleAllDownloadLinks() {
-    console.log('SABconnect++ NZBIndex: Running handleAllDownloadLinks...');
+    console.log('SABconnect+++ NZBIndex: Running handleAllDownloadLinks...');
     
     $('input[value="Create NZB"]').each(function () {
-        console.log('SABconnect++ NZBIndex: Found "Create NZB" button');
+        console.log('SABconnect+++ NZBIndex: Found "Create NZB" button');
         if ($(this).attr('x-nzbpatched') !== 'true') {
             $(this).attr('x-nzbpatched', 'true');
             // add button to send checked items to SABConnect
@@ -94,7 +94,7 @@ function handleAllDownloadLinks() {
 
     // Check for both escaped and unescaped slashes in the URL
     $('table a[href*="nzbindex.nl/download/"], table a[href*="nzbindex.nl\\/download\\/"]').each(function () {
-        console.log('SABconnect++ NZBIndex: Found nzbindex.nl download link:', $(this).attr('href'));
+        console.log('SABconnect+++ NZBIndex: Found nzbindex.nl download link:', $(this).attr('href'));
         if ($(this).attr('x-nzbpatched') !== 'true') {
             $(this).attr('x-nzbpatched', 'true');
             var img = chrome.runtime.getURL('/images/content_icon.png');
@@ -112,7 +112,7 @@ function handleAllDownloadLinks() {
 
     // Check for both escaped and unescaped slashes in the URL
     $('table a[href*="nzbindex.com/download/"], table a[href*="nzbindex.com\\/download\\/"]').each(function () {
-        console.log('SABconnect++ NZBIndex: Found nzbindex.com download link:', $(this).attr('href'));
+        console.log('SABconnect+++ NZBIndex: Found nzbindex.com download link:', $(this).attr('href'));
         if ($(this).attr('x-nzbpatched') !== 'true') {
             $(this).attr('x-nzbpatched', 'true');
             var img = chrome.runtime.getURL('/images/content_icon.png');
@@ -131,7 +131,7 @@ function handleAllDownloadLinks() {
     // Also try without table restriction - modern NZBIndex uses UUID-based .nzb links
     $('a[href*="/download/"][href$=".nzb"]').each(function () {
         var href = $(this).attr('href');
-        console.log('SABconnect++ NZBIndex: Found modern download link:', href);
+        console.log('SABconnect+++ NZBIndex: Found modern download link:', href);
         if ($(this).attr('x-nzbpatched') !== 'true' && !$(this).hasClass('addSABnzbdOnClick')) {
             $(this).attr('x-nzbpatched', 'true');
             var img = chrome.runtime.getURL('/images/content_icon.png');
@@ -154,7 +154,7 @@ function RefreshSettings() {
 }
 
 Initialize('nzbindex', RefreshSettings, function () {
-    console.log('SABconnect++ NZBIndex: Script initialized');
+    console.log('SABconnect+++ NZBIndex: Script initialized');
     
     let insertionInProgress = false;
 
@@ -165,20 +165,20 @@ Initialize('nzbindex', RefreshSettings, function () {
             
             // Fallback: Look for any download links if no icons were added
             if ($('a.addSABnzbdOnClick').length === 0 && $('input.addSABnzbd').length === 0) {
-                console.log('SABconnect++ NZBIndex: No icons added with standard selectors. Trying fallback...');
+                console.log('SABconnect+++ NZBIndex: No icons added with standard selectors. Trying fallback...');
                 
                 // Debug: Show what links are on the page
-                console.log('SABconnect++ NZBIndex: All links:', $('a').length);
-                console.log('SABconnect++ NZBIndex: Links with /download/:', $('a[href*="/download/"]').length);
-                console.log('SABconnect++ NZBIndex: Links with .nzb:', $('a[href*=".nzb"]').length);
-                console.log('SABconnect++ NZBIndex: Links with download text:', $('a:contains("Download")').length);
+                console.log('SABconnect+++ NZBIndex: All links:', $('a').length);
+                console.log('SABconnect+++ NZBIndex: Links with /download/:', $('a[href*="/download/"]').length);
+                console.log('SABconnect+++ NZBIndex: Links with .nzb:', $('a[href*=".nzb"]').length);
+                console.log('SABconnect+++ NZBIndex: Links with download text:', $('a:contains("Download")').length);
                 
                 // Try broader selectors - modern NZBIndex uses UUID-based .nzb links
                 var downloadLinks = $('a[href*="/download/"][href$=".nzb"], a[href*=".nzb"], a[href*="get?"], a[title*="Download"], a:contains("Download")');
-                console.log('SABconnect++ NZBIndex: Found potential download links:', downloadLinks.length);
+                console.log('SABconnect+++ NZBIndex: Found potential download links:', downloadLinks.length);
                 
                 if (downloadLinks.length > 0) {
-                    console.log('SABconnect++ NZBIndex: First download link href:', downloadLinks.first().attr('href'));
+                    console.log('SABconnect+++ NZBIndex: First download link href:', downloadLinks.first().attr('href'));
                 }
                 
                 // Modern NZBIndex uses UUID-based download links like /download/uuid.nzb
@@ -189,7 +189,7 @@ Initialize('nzbindex', RefreshSettings, function () {
                     clickHandler: addToSABnzbdFromNzbindex
                 });
                 
-                console.log('SABconnect++ NZBIndex: Total icons added:', $('a.addSABnzbdOnClick').length);
+                console.log('SABconnect+++ NZBIndex: Total icons added:', $('a.addSABnzbdOnClick').length);
             }
             
             insertionInProgress = false;
@@ -212,7 +212,7 @@ Initialize('nzbindex', RefreshSettings, function () {
     // Also try after page is fully loaded
     $(window).on('load', function() {
         setTimeout(function() {
-            console.log('SABconnect++ NZBIndex: Checking after window load...');
+            console.log('SABconnect+++ NZBIndex: Checking after window load...');
             DOMNodeInserted();
         }, 500);
     });
@@ -225,7 +225,7 @@ Initialize('nzbindex', RefreshSettings, function () {
             return;
         }
         if ($('a.addSABnzbdOnClick').length === 0) {
-            console.log('SABconnect++ NZBIndex: Retry #' + retryCount);
+            console.log('SABconnect+++ NZBIndex: Retry #' + retryCount);
             DOMNodeInserted();
         } else {
             clearInterval(retryInterval);

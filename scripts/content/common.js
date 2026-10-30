@@ -121,7 +121,7 @@ function Initialize( provider, refresh_function, callback )
 	}
 		
 	chrome.runtime.sendMessage( request, function( response ) {
-		console.log('SABconnect++ Initialize: Received response:', response);
+		console.log('SABconnect+++ Initialize: Received response:', response);
 		if( response && response.enabled ) {
 			callback();
 		}
@@ -189,15 +189,15 @@ function addIconsWithFallback(options) {
 	});
 	
 	if (addedCount > 0) {
-		console.log('SABconnect++ Fallback: Added ' + addedCount + ' icons');
+		console.log('SABconnect+++ Fallback: Added ' + addedCount + ' icons');
 	} else {
 		// If still no links found, log what we see
-		console.log('SABconnect++ Fallback: No matching links found with selector:', linkSelector);
-		console.log('SABconnect++ Fallback: Total anchors on page:', $('a').length);
+		console.log('SABconnect+++ Fallback: No matching links found with selector:', linkSelector);
+		console.log('SABconnect+++ Fallback: Total anchors on page:', $('a').length);
 		
 		// Log first few link hrefs for debugging
 		$('a').slice(0, 5).each(function(i) {
-			console.log('SABconnect++ Fallback: Link ' + i + ':', $(this).attr('href'));
+			console.log('SABconnect+++ Fallback: Link ' + i + ':', $(this).attr('href'));
 		});
 	}
 	

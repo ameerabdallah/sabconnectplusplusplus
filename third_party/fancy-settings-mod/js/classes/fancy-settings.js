@@ -1,4 +1,4 @@
-// FancySettings implementation for SABconnect++
+// FancySettings implementation for SABconnect+++
 var FancySettings = {
     tabs: {},
     manifest: {},
@@ -8,7 +8,7 @@ var FancySettings = {
         var self = this;
         
         // Set basic elements
-        document.getElementById('title').textContent = manifest.name || 'SABconnect++ Settings';
+        document.getElementById('title').textContent = manifest.name || 'SABconnect+++ Settings';
         document.getElementById('settings-label').textContent = 'Settings';
         document.getElementById('search-label').textContent = 'Search Results';
         document.getElementById('search').placeholder = 'Search settings...';

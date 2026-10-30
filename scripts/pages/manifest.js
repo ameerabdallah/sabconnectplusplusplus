@@ -363,7 +363,7 @@ window.manifest = {
 			'name': 'config_category_summary',
 			'type': 'description',
 			'text':
-					'Below are the category settings provided by SABconnect++. For more information regarding categories,\
+					'Below are the category settings provided by SABconnect+++. For more information regarding categories,\
 					please read the <a href="https://github.com/gboudreau/sabconnectplusplus/wiki/Categories">wiki page</a>.'
 		},
 		{

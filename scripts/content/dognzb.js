@@ -97,7 +97,7 @@ function handleAllDownloadLinks() {
 }
 
 Initialize( 'dognzb', null, function() {
-	console.log('SABconnect++ DogNZB: Script initialized');
+	console.log('SABconnect+++ DogNZB: Script initialized');
 	handleAllDownloadLinks();
 	sabcppDogCheck = function(){
 		if($('button.dog-download-button').not('.sabcpp-fake-dognzb-marker').length >= 1) {

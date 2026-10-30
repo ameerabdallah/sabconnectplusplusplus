@@ -1,4 +1,4 @@
-// Background Service Worker for SABconnect++
+// Background Service Worker for SABconnect+++
 // Manifest V3 compatible
 
 // Simplified store implementation for service worker

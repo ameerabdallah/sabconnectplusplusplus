@@ -9,21 +9,21 @@
 	// Debug authentication parameters
 	var uid = $('[name=UID]').val();
 	var rsstoken = $('[name=RSSTOKEN]').val();
-	console.log('SABconnect++ Newznab: Authentication debug:');
-	console.log('SABconnect++ Newznab: UID found:', uid ? 'Yes (' + uid + ')' : 'No');
-	console.log('SABconnect++ Newznab: RSSTOKEN found:', rsstoken ? 'Yes (' + rsstoken.substring(0, 10) + '...)' : 'No');
-	console.log('SABconnect++ Newznab: Link rel=alternate:', linkRelAlternate);
+	console.log('SABconnect+++ Newznab: Authentication debug:');
+	console.log('SABconnect+++ Newznab: UID found:', uid ? 'Yes (' + uid + ')' : 'No');
+	console.log('SABconnect+++ Newznab: RSSTOKEN found:', rsstoken ? 'Yes (' + rsstoken.substring(0, 10) + '...)' : 'No');
+	console.log('SABconnect+++ Newznab: Link rel=alternate:', linkRelAlternate);
 
 	// Build authentication queryString only if we have valid authentication
 	if (uid && rsstoken) {
 		queryString = '?i=' + uid + '&r=' + rsstoken + '&del=1';
-		console.log('SABconnect++ Newznab: Using standard form auth');
+		console.log('SABconnect+++ Newznab: Using standard form auth');
 	} else if (linkRelAlternate && linkRelAlternate.match(/[\?&]i=.+$/)) {
 		var found = linkRelAlternate.match(/[\?&](i=.+$)/);
 		queryString = '?' + found[1];
-		console.log('SABconnect++ Newznab: Using queryString from link rel=alternate:', queryString);
+		console.log('SABconnect+++ Newznab: Using queryString from link rel=alternate:', queryString);
 	} else {
-		console.log('SABconnect++ Newznab: Standard auth not found, trying alternatives...');
+		console.log('SABconnect+++ Newznab: Standard auth not found, trying alternatives...');
 		
 		// Try to find auth in meta tags
 		var metaUID = $('meta[name="uid"]').attr('content');
@@ -43,30 +43,30 @@
 			if (tokenMatch) scriptToken = tokenMatch[1];
 		});
 		
-		console.log('SABconnect++ Newznab: Alternative auth search:');
-		console.log('SABconnect++ Newznab: Meta UID:', metaUID);
-		console.log('SABconnect++ Newznab: Meta Token:', metaToken);
-		console.log('SABconnect++ Newznab: Data UID:', dataUID);
-		console.log('SABconnect++ Newznab: Data Token:', dataToken);
-		console.log('SABconnect++ Newznab: Script UID:', scriptUID);
-		console.log('SABconnect++ Newznab: Script Token:', scriptToken);
+		console.log('SABconnect+++ Newznab: Alternative auth search:');
+		console.log('SABconnect+++ Newznab: Meta UID:', metaUID);
+		console.log('SABconnect+++ Newznab: Meta Token:', metaToken);
+		console.log('SABconnect+++ Newznab: Data UID:', dataUID);
+		console.log('SABconnect+++ Newznab: Data Token:', dataToken);
+		console.log('SABconnect+++ Newznab: Script UID:', scriptUID);
+		console.log('SABconnect+++ Newznab: Script Token:', scriptToken);
 		
 		// Use alternative auth if found
 		if (metaUID && metaToken) {
 			queryString = '?i=' + metaUID + '&r=' + metaToken + '&del=1';
-			console.log('SABconnect++ Newznab: Using meta auth');
+			console.log('SABconnect+++ Newznab: Using meta auth');
 		} else if (dataUID && dataToken) {
 			queryString = '?i=' + dataUID + '&r=' + dataToken + '&del=1';
-			console.log('SABconnect++ Newznab: Using data auth');
+			console.log('SABconnect+++ Newznab: Using data auth');
 		} else if (scriptUID && scriptToken) {
 			queryString = '?i=' + scriptUID + '&r=' + scriptToken + '&del=1';
-			console.log('SABconnect++ Newznab: Using script auth');
+			console.log('SABconnect+++ Newznab: Using script auth');
 		} else {
-			console.log('SABconnect++ Newznab: No authentication found - will use URLs as-is');
+			console.log('SABconnect+++ Newznab: No authentication found - will use URLs as-is');
 		}
 	}
 
-	console.log('SABconnect++ Newznab: Final queryString:', queryString);
+	console.log('SABconnect+++ Newznab: Final queryString:', queryString);
 
 	GetSetting('config_ignore_categories', function( value ) {
 		ignoreCats = value;
@@ -189,14 +189,14 @@
 	}
 
 	Initialize('newznab', null, function() {
-		console.log('SABconnect++ Newznab: Script initialized');
-		console.log('SABconnect++ Newznab: Found existing addSABnzbd links:', $('a.addSABnzbd').length);
+		console.log('SABconnect+++ Newznab: Script initialized');
+		console.log('SABconnect+++ Newznab: Found existing addSABnzbd links:', $('a.addSABnzbd').length);
 
 		if ($('a.addSABnzbd').length == 0) {
 			// Cover view: Loop through each #coverstable and #browselongtable row and add a one click link next to the download link
-			console.log('SABconnect++ Newznab: Checking cover view tables');
-			console.log('SABconnect++ Newznab: #coverstable rows:', $('#coverstable > tbody > tr:gt(0)').length);
-			console.log('SABconnect++ Newznab: #browselongtable rows:', $('#browselongtable > tbody > tr:gt(0)').length);
+			console.log('SABconnect+++ Newznab: Checking cover view tables');
+			console.log('SABconnect+++ Newznab: #coverstable rows:', $('#coverstable > tbody > tr:gt(0)').length);
+			console.log('SABconnect+++ Newznab: #browselongtable rows:', $('#browselongtable > tbody > tr:gt(0)').length);
 			$.merge(
 				$('#coverstable > tbody > tr:gt(0)'),
 				$('#browselongtable > tbody > tr:gt(0)')
@@ -221,8 +221,8 @@
 
 		if ($('a.addSABnzbd').length == 0) {
 			// List view: Loop through all the td.check items and add a one-click link next the nearby title
-			console.log('SABconnect++ Newznab: Checking list view');
-			console.log('SABconnect++ Newznab: td.check elements:', $('td.check, td:has(input[type="checkbox"])').length);
+			console.log('SABconnect+++ Newznab: Checking list view');
+			console.log('SABconnect+++ Newznab: td.check elements:', $('td.check, td:has(input[type="checkbox"])').length);
 			$('td.check, td:has(input[type="checkbox"])').each(function() {
 				var $tr = $(this).parent(),
 					href = $tr.find('.icon_nzb a').attr('href') || $tr.find('a.icon_nzb').attr('href') || $tr.find('a#downloadlink').attr('href') || $tr.find('a[href*="getnzb"]').attr('href') || $tr.find('a.nzb-download').attr('href');
@@ -248,8 +248,8 @@
 
 		if ($('a.addSABnzbd').length == 0) {
 			// Details view (etc.)
-			console.log('SABconnect++ Newznab: Checking details view');
-			console.log('SABconnect++ Newznab: div.icon_nzb elements:', $('div.icon_nzb').length);
+			console.log('SABconnect+++ Newznab: Checking details view');
+			console.log('SABconnect+++ Newznab: div.icon_nzb elements:', $('div.icon_nzb').length);
 			$('div.icon_nzb').each(function() {
 				var $tr = $(this),
 					href = $(this).children("a").attr('href');
@@ -319,11 +319,11 @@
 		
 		// Fallback: Try to find download links more broadly if no icons were added
 		if ($('a.addSABnzbd').length == 0 && $('a.addSABnzbdDetails').length == 0) {
-			console.log('SABconnect++ Newznab: No icons added with standard selectors. Trying fallback...');
-			console.log('SABconnect++ Newznab: Current hostname:', window.location.hostname);
-			console.log('SABconnect++ Newznab: Current URL:', window.location.href);
-			console.log('SABconnect++ Newznab: Looking for links with selectors: a[href*="/getnzb/"], a[href*=".nzb"]');
-			console.log('SABconnect++ Newznab: Found links:', $('a[href*="/getnzb/"], a[href*=".nzb"]').length);
+			console.log('SABconnect+++ Newznab: No icons added with standard selectors. Trying fallback...');
+			console.log('SABconnect+++ Newznab: Current hostname:', window.location.hostname);
+			console.log('SABconnect+++ Newznab: Current URL:', window.location.href);
+			console.log('SABconnect+++ Newznab: Looking for links with selectors: a[href*="/getnzb/"], a[href*=".nzb"]');
+			console.log('SABconnect+++ Newznab: Found links:', $('a[href*="/getnzb/"], a[href*=".nzb"]').length);
 			
 			// Try multiple selector patterns common to different Newznab sites
 			var selectorPatterns = [
@@ -341,7 +341,7 @@
 			for (var i = 0; i < selectorPatterns.length && addedCount === 0; i++) {
 				var pattern = selectorPatterns[i];
 				var foundLinks = $(pattern).length;
-				console.log('SABconnect++ Newznab: Trying pattern', i + 1, ':', pattern, '- Found', foundLinks, 'links');
+				console.log('SABconnect+++ Newznab: Trying pattern', i + 1, ':', pattern, '- Found', foundLinks, 'links');
 				
 				if (foundLinks > 0) {
 					addedCount = addIconsWithFallback({
@@ -459,7 +459,7 @@
 					});
 					
 					if (addedCount > 0) {
-						console.log('SABconnect++ Newznab: Successfully added', addedCount, 'icons using pattern:', pattern);
+						console.log('SABconnect+++ Newznab: Successfully added', addedCount, 'icons using pattern:', pattern);
 						break;
 					}
 				}
@@ -467,26 +467,26 @@
 			
 			// Debug info only if still no icons
 			if (addedCount === 0) {
-				console.log('SABconnect++ Newznab: Debug info - still no icons added:');
-				console.log('SABconnect++ Newznab: All tables:', $('table').length);
-				console.log('SABconnect++ Newznab: All links with .nzb in href:', $('a[href*=".nzb"]').length);
-				console.log('SABconnect++ Newznab: All links with /getnzb/ in href:', $('a[href*="/getnzb/"]').length);
+				console.log('SABconnect+++ Newznab: Debug info - still no icons added:');
+				console.log('SABconnect+++ Newznab: All tables:', $('table').length);
+				console.log('SABconnect+++ Newznab: All links with .nzb in href:', $('a[href*=".nzb"]').length);
+				console.log('SABconnect+++ Newznab: All links with /getnzb/ in href:', $('a[href*="/getnzb/"]').length);
 				
 				// Sample some links to understand the site structure
-				console.log('SABconnect++ Newznab: Sample links on page:');
+				console.log('SABconnect+++ Newznab: Sample links on page:');
 				$('a').slice(0, 20).each(function(index, element) {
 					var href = $(element).attr('href');
 					var title = $(element).attr('title');
 					var text = $(element).text().trim();
 					if (href && (href.indexOf('download') !== -1 || href.indexOf('nzb') !== -1 || href.indexOf('get') !== -1)) {
-						console.log('SABconnect++ Newznab: Potential download link:', { href: href, title: title, text: text });
+						console.log('SABconnect+++ Newznab: Potential download link:', { href: href, title: title, text: text });
 					}
 				});
 			}
 			
-			console.log('SABconnect++ Newznab: FINAL - Total SAB icons added:', $('a.addSABnzbd').length);
+			console.log('SABconnect+++ Newznab: FINAL - Total SAB icons added:', $('a.addSABnzbd').length);
 		} else {
-			console.log('SABconnect++ Newznab: Successfully added icons:', $('a.addSABnzbd').length);
+			console.log('SABconnect+++ Newznab: Successfully added icons:', $('a.addSABnzbd').length);
 		}
 	});
 
