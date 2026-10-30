@@ -913,14 +913,18 @@ function getScheduleStatus() {
 }
 
 function SetupContextMenu() {
-    if (store.get('config_enable_context_menu')) {
-        chrome.contextMenus.create({
-            id: "SABconnect",
-            title: "Send to SABnzbd",
-            contexts: ["link"],
-            targetUrlPatterns: ["*://*/*"]
-        });
-    }
+    // Clear first: the background page can start several times per session
+    // (Firefox event page), and re-creating an existing id is an error.
+    chrome.contextMenus.removeAll(function() {
+        if (store.get('config_enable_context_menu')) {
+            chrome.contextMenus.create({
+                id: "SABconnect",
+                title: "Send to SABnzbd",
+                contexts: ["link"],
+                targetUrlPatterns: ["*://*/*"]
+            });
+        }
+    });
 }
 
 
