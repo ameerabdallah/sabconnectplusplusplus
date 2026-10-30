@@ -15,8 +15,8 @@ function addToSABnzbdFromAnimezb() {
 }
 
 function addMultiToSABnzbdFromAnimezb() {
-	//if ($('form input[type=checkbox][checked]').size() == 0)
-	if ($('table[id="search-results"] tr[class*="highlighted"][class*="results-top-tr"]').size() == 0)
+	//if ($('form input[type=checkbox][checked]').length == 0)
+	if ($('table[id="search-results"] tr[class*="highlighted"][class*="results-top-tr"]').length == 0)
 	{
 		alert('Please select at least one file');
 		return false;

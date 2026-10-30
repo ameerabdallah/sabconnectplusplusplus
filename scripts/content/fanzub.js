@@ -15,7 +15,7 @@ function addToSABnzbdFromFanzub() {
 }
 
 function addMultiToSABnzbdFromFanzub() {
-	if ($('table.fanzub input[type=checkbox][checked]').size() == 0)
+	if ($('table.fanzub input[type=checkbox][checked]').length == 0)
 	{
 		alert('Please select at least one file');
 		return false;

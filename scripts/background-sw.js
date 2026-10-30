@@ -1587,7 +1587,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
                     await chrome.scripting.executeScript({
                         target: { tabId: tabId, allFrames: true },
                         files: [
-                            "third_party/jquery/jquery-1.12.4.min.js",
+                            "third_party/jquery/jquery-3.7.1.min.js",
                             "scripts/content/common.js",
                             "third_party/webtoolkit/webtoolkit.base64.js",
                             "scripts/content/newznab.js"
@@ -1620,7 +1620,7 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
                     await chrome.scripting.executeScript({
                         target: { tabId: tabId },
                         files: [
-                            "third_party/jquery/jquery-1.12.4.min.js",
+                            "third_party/jquery/jquery-3.7.1.min.js",
                             "third_party/jquery/jquery.notify.js",
                             "scripts/content/common.js",
                             "scripts/pages/newznab-autoadd.js"
