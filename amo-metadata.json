@@ -1,0 +1,9 @@
+{
+	"summary": {
+		"en-US": "Send NZBs to SABnzbd from indexer sites and the context menu, and monitor and control your SABnzbd queue from the toolbar."
+	},
+	"categories": ["download-management"],
+	"version": {
+		"license": "GPL-3.0-only"
+	}
+}
